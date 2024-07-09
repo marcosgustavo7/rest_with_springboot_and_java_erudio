@@ -11,14 +11,15 @@ import br.com.erudio.exceptions.UnsupportedMathOperationException;
 
 @RestController
 
-public class MathController {
+public class MultiplicationController {
 
 	private final AtomicLong counter = new AtomicLong();
 	
-	@RequestMapping(value = "/sum/{numberOne}/{numberTwo}",
+	@RequestMapping(value = "/multiplication/{numberOne}/{numberTwo}",
 			method = RequestMethod.GET)
 	
-	public Double sum(
+
+	public Double multiplication(
 			@PathVariable(value = "numberOne")String numberOne,
 			@PathVariable(value = "numberTwo")String numberTwo) 
 	throws Exception{
@@ -29,7 +30,8 @@ public class MathController {
 		
 		}
 		
-		return convertToDouble(numberOne) + convertToDouble(numberTwo);
+		return convertToDouble(numberOne) * convertToDouble(numberTwo);
+		
 		
 	}
 
