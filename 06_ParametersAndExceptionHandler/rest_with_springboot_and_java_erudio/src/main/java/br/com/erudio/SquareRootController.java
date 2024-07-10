@@ -17,6 +17,8 @@ public class SquareRootController {
 	
 	Double squareRoot = 0.00;
 	
+	ClassController classController = new ClassController();
+	
 	@RequestMapping(value = "/squareRoot/{numberOne}",
 			method = RequestMethod.GET)
 	
@@ -26,29 +28,17 @@ public class SquareRootController {
 	throws Exception{
 		
 		
-		if(!isNumeric(numberOne))
-		{ throw new UnsupportedMathOperationException("Coloque um valor numérico por favor!");
-		}
+		if(classController.isNumeric(numberOne))
+		{ 
 		
-		for(Double i = 0.00; i < convertToDouble(numberOne)+1; i++) {
+		for(Double i = 0.00; i < classController.convertToDouble(numberOne)+1; i++) {
 		
-			if(i * i == convertToDouble(numberOne)) return i;
+			if(i * i == classController.convertToDouble(numberOne)) return i;
 		}
 		return 0D;
+		}throw new UnsupportedMathOperationException("Coloque um valor numérico por favor!");
+	}
 	}
 
-	private Double convertToDouble(String strNumber) {
-		if (strNumber == null) return 0D;
-		String number = strNumber.replaceAll(",",".");
-		if(isNumeric(number)) return Double.parseDouble(number);
-		return 0D;
-	}
-
-	private boolean isNumeric(String strNumber) {
-		if (strNumber == null) return false;
-		String number = strNumber.replaceAll(",","."); 
-		return number.matches("[-+]?[0-9]*\\.?[0-9]+");
-
-	}
 	
-}
+

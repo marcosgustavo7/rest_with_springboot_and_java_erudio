@@ -15,6 +15,8 @@ public class SubtractionController {
 
 	private final AtomicLong counter = new AtomicLong();
 	
+	ClassController classController = new ClassController();
+	
 	@RequestMapping(value = "/subtraction/{numberOne}/{numberTwo}",
 			method = RequestMethod.GET)
 	
@@ -25,28 +27,13 @@ public class SubtractionController {
 	throws Exception{
 		
 		
-		if(!isNumeric(numberOne) || !isNumeric(numberTwo))
-		{ throw new UnsupportedMathOperationException("Coloque um valor numérico por favor!");
 		
-		}
-		
-		return convertToDouble(numberOne) - convertToDouble(numberTwo);
-		
-		
-	}
+		if(ClassController.isNumeric(numberOne) && ClassController.isNumeric(numberTwo)) {
 
-	private Double convertToDouble(String strNumber) {
-		if (strNumber == null) return 0D;
-		String number = strNumber.replaceAll(",",".");
-		if(isNumeric(number)) return Double.parseDouble(number);
-		return 0D;
-	}
-
-	private boolean isNumeric(String strNumber) {
-		if (strNumber == null) return false;
-		String number = strNumber.replaceAll(",","."); 
-		return number.matches("[-+]?[0-9]*\\.?[0-9]+");
-
-	}
 	
+	return ClassController.convertToDouble(numberOne) - ClassController.convertToDouble(numberTwo);
+		} 
+		throw new UnsupportedMathOperationException("Coloque um valor numérico por favor!");
+	
+	}
 }

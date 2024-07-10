@@ -17,38 +17,33 @@ public class AverageController {
 	
 	private final AtomicLong counter = new AtomicLong();
 	
+	ClassController classController = new ClassController();
+	
 	@RequestMapping(value = "/average/{numberOne}/{numberTwo}",
 			method = RequestMethod.GET)
 	
-
 	public Double average(
 			@PathVariable(value = "numberOne")String numberOne,
 			@PathVariable(value = "numberTwo")String numberTwo) 
 	throws Exception{
 		
 		
-		if(!isNumeric(numberOne) || !isNumeric(numberTwo))
-		{ throw new UnsupportedMathOperationException("Coloque um valor numérico por favor!");
 		
-		}
+		if(ClassController.isNumeric(numberOne) && ClassController.isNumeric(numberTwo)) {
+
+			averageNumber = (classController.convertToDouble(numberOne) + classController.convertToDouble(numberTwo))/2;
+			return averageNumber;
+		} 
+		throw new UnsupportedMathOperationException("Coloque um valor numérico por favor!");
 		
-		averageNumber = (convertToDouble(numberOne) + convertToDouble(numberTwo))/2;
-		
-		return averageNumber;
-	}
-
-	private Double convertToDouble(String strNumber) {
-		if (strNumber == null) return 0D;
-		String number = strNumber.replaceAll(",",".");
-		if(isNumeric(number)) return Double.parseDouble(number);
-		return 0D;
-	}
-
-	private boolean isNumeric(String strNumber) {
-		if (strNumber == null) return false;
-		String number = strNumber.replaceAll(",","."); 
-		return number.matches("[-+]?[0-9]*\\.?[0-9]+");
-
-	}
 	
+
+
 }
+	
+		
+		
+	}
+
+	
+
