@@ -1,4 +1,4 @@
-package br.com.erudio;
+package br.com.erudio.math;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -7,15 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.erudio.controllers.ClassController;
 import br.com.erudio.exceptions.UnsupportedMathOperationException;
 
 @RestController
 
-public class SumController {
+public class SumMath {
 
 	private final AtomicLong counter = new AtomicLong();
 	
-	ClassController classController = new ClassController();
+	
 	
 	@RequestMapping(value = "/sum/{numberOne}/{numberTwo}",
 			method = RequestMethod.GET)

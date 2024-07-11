@@ -1,4 +1,4 @@
-package br.com.erudio;
+package br.com.erudio.math;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -7,21 +7,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.erudio.controllers.ClassController;
 import br.com.erudio.exceptions.UnsupportedMathOperationException;
 
 @RestController
 
-public class SubtractionController {
+public class AverageMath {
 
+	Double averageNumber = 0.00;
+	
 	private final AtomicLong counter = new AtomicLong();
 	
-	ClassController classController = new ClassController();
 	
-	@RequestMapping(value = "/subtraction/{numberOne}/{numberTwo}",
+	
+	@RequestMapping(value = "/average/{numberOne}/{numberTwo}",
 			method = RequestMethod.GET)
 	
-
-	public Double subtraction(
+	public Double average(
 			@PathVariable(value = "numberOne")String numberOne,
 			@PathVariable(value = "numberTwo")String numberTwo) 
 	throws Exception{
@@ -30,10 +32,19 @@ public class SubtractionController {
 		
 		if(ClassController.isNumeric(numberOne) && ClassController.isNumeric(numberTwo)) {
 
-	
-	return ClassController.convertToDouble(numberOne) - ClassController.convertToDouble(numberTwo);
+			averageNumber = (ClassController.convertToDouble(numberOne) + ClassController.convertToDouble(numberTwo))/2;
+			return averageNumber;
 		} 
 		throw new UnsupportedMathOperationException("Coloque um valor numérico por favor!");
+		
 	
-	}
+
+
 }
+	
+		
+		
+	}
+
+	
+

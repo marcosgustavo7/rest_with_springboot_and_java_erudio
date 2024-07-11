@@ -1,4 +1,4 @@
-package br.com.erudio;
+package br.com.erudio.math;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -7,17 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.erudio.controllers.ClassController;
 import br.com.erudio.exceptions.UnsupportedMathOperationException;
 
 @RestController
 
-public class SquareRootController {
+public class SquareRootMath {
 
 	private final AtomicLong counter = new AtomicLong();
 	
 	Double squareRoot = 0.00;
 	
-	ClassController classController = new ClassController();
+	
 	
 	@RequestMapping(value = "/squareRoot/{numberOne}",
 			method = RequestMethod.GET)
@@ -28,14 +29,9 @@ public class SquareRootController {
 	throws Exception{
 		
 		
-		if(classController.isNumeric(numberOne))
-		{ 
-		
-		for(Double i = 0.00; i < classController.convertToDouble(numberOne)+1; i++) {
-		
-			if(i * i == classController.convertToDouble(numberOne)) return i;
-		}
-		return 0D;
+		if(ClassController.isNumeric(numberOne))
+		{
+			return Math.sqrt(ClassController.convertToDouble(numberOne));
 		}throw new UnsupportedMathOperationException("Coloque um valor numérico por favor!");
 	}
 	}
